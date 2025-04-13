@@ -390,6 +390,7 @@ public class SafeKeyboard {
 
         FrameLayout done = keyContainer.findViewById(R.id.keyboardDone);
         done.setOnClickListener(v -> {
+            Log.d(TAG, "*************** hide key clicked");
             if (isKeyboardShown()) {
                 safeHandler.removeCallbacks(hideRun);
                 safeHandler.removeCallbacks(showRun);
@@ -555,6 +556,7 @@ public class SafeKeyboard {
         showAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+                Log.d(TAG, "*************** startAnimation start");
                 isShowStart = true;
                 // 在这里设置可见, 会出现第一次显示键盘时直接闪现出来, 没有动画效果, 后面正常
                 // keyContainer.setVisibility(View.VISIBLE);
@@ -566,6 +568,7 @@ public class SafeKeyboard {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                Log.d(TAG, "*************** startAnimation end");
                 isShowStart = false;
                 keyContainer.clearAnimation();
             }
@@ -578,6 +581,7 @@ public class SafeKeyboard {
         hideAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+                Log.d(TAG, "*************** hideAnimation start");
                 isHideStart = true;
                 // 动画持续时间 HIDE_TIME 结束后, 不管什么操作, 都需要执行, 把 isHideStart 值设为 false; 否则
                 // 如果 onAnimationEnd 因为某些原因没有执行, 会影响下一次使用
@@ -587,6 +591,7 @@ public class SafeKeyboard {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                Log.d(TAG, "*************** hideAnimation end");
                 safeHandler.removeCallbacks(hideEnd);
                 if (isHideStart) {
                     // isHideStart 未被置为初试状态, 说明还没有执行 hideEnd 内容, 这里手动执行一下
